@@ -1,20 +1,45 @@
 <mvc:View
-	controllerName="de.inwerken.pizzaApp.controller.Main"
-	displayBlock="true"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc">
-
-	<MessagePage
-		title="{i18n>appTitle}"
-		text="{i18n>appTitle}"
-		icon="sap-icon://accept"
-		id="page"
-		description="{i18n>appDescription}">
-		<buttons>
-			<Button
-				text="{i18n>btnText}"
-				press="sayHello" />
-		</buttons>
-	</MessagePage>
-
+  controllerName="de.inwerken.pizzaApp.controller.Main"
+  displayBlock="true"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:f="sap.f"
+  xmlns:grid="sap.ui.layout.cssgrid"
+  xmlns:mvc="sap.ui.core.mvc"
+>
+  <Page id="page" title="{i18n>title}">
+    <content>
+      <f:GridList
+        id="menuList"
+        items="{path: '/ItemSet', sorter: {path: 'Type', group: true}}"
+        class="sapUiContentPadding"
+      >
+        <f:customLayout>
+          <grid:GridBoxLayout />
+        </f:customLayout>
+        <f:items>
+          <f:GridListItem type="Active" press=".orderItem">
+            <HBox
+              justifyContent="SpaceBetween"
+              class="sapUiSmallMargin"
+              height="40px"
+              renderType="Bare"
+              alignItems="Center"
+            >
+              <Title text="{Name}" wrapping="true" />
+              <Text text="{Price} {Currency}" width="70px" />
+            </HBox>
+            <HBox justifyContent="Center">
+              <Image
+                src="http://{Picture}"
+                width="250px"
+                height="170px"
+                lazyLoading="true"
+              />
+            </HBox>
+          </f:GridListItem>
+        </f:items>
+      </f:GridList>
+    </content>
+  </Page>
 </mvc:View>
