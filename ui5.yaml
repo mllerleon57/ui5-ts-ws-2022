@@ -36,9 +36,9 @@ server:
       configuration:
         debug: false
         /sap:
-          target: http://s4hfaa2021h21.internal.xc:50000/sap
+          target: add-your-url-here
           replacePath: true
           auth:
             fromEnv: false
-            user: JSCHMIDT
-            pass: mipT8mtZ9QEsy3E9lOzI
+            user: name
+            pass: password
