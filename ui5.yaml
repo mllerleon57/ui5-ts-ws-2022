@@ -1,0 +1,44 @@
+specVersion: "2.6"
+metadata:
+  name: de.inwerken.pizzaApp
+type: application
+framework:
+  name: OpenUI5
+  version: "1.108.1"
+  libraries:
+    - name: sap.m
+    - name: sap.ui.core
+    - name: sap.ui.unified
+    - name: themelib_sap_horizon
+builder:
+  customTasks:
+    - name: ui5-tooling-transpile-task
+      afterTask: replaceVersion
+      configuration: &transpileConfig
+        removeConsoleStatements: true
+        transpileAsync: true
+        transpileTypeScript: true
+server:
+  customMiddleware:
+    - name: ui5-middleware-livereload
+      afterMiddleware: compression
+      configuration:
+        debug: true
+        extraExts: "xml,json,properties"
+        port: 35729
+        path: "webapp"
+    - name: ui5-tooling-transpile-middleware
+      afterMiddleware: compression
+      configuration:
+        *transpileConfig
+    - name: ui5-middleware-route-proxy
+      afterMiddleware: compression
+      configuration:
+        debug: false
+        /sap:
+          target: http://s4hfaa2021h21.internal.xc:50000/sap
+          replacePath: true
+          auth:
+            fromEnv: false
+            user: JSCHMIDT
+            pass: mipT8mtZ9QEsy3E9lOzI
