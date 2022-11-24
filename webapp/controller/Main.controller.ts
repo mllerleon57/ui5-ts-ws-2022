@@ -30,7 +30,7 @@ export default class Main extends BaseController {
   }
 
   private _createOrder(sPizzaId: string) {
-    const oData = { Id: sPizzaId };
+    const oData = { Menuid: sPizzaId };
     const oResourceBundle = this.getResourceBundle() as ResourceBundle;
 
     (this.getModel() as ODataModel).create("/OrderSet", oData, {
