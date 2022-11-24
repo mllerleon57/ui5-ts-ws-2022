@@ -29,10 +29,10 @@
               <Title text="{Name}" wrapping="true" />
               <Text text="{Price} {Currency}" width="70px" />
             </HBox>
-            <HBox justifyContent="Center">
+            <HBox justifyContent="Center" renderType="Bare">
               <Image
                 src="http://{Picture}"
-                width="250px"
+                width="95%"
                 height="170px"
                 lazyLoading="true"
               />
