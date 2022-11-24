@@ -1,5 +1,13 @@
 # pizzaApp
 
+Starting point is the main branch.
+Solution steps are:
+odata-service
+gridlist
+
+final
+
+
 ## Description
 
 This app demonstrates a TypeScript setup for developing UI5 applications.
