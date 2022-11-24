@@ -1,0 +1,28 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+  <Dialog id="ordersDialog" title="{i18n>orders}">
+    <content>
+      <List
+        mode="Delete"
+        delete=".deleteOrder"
+        items="{path: '/OrderSet', parameters: {expand: 'toItem'}}"
+        class="sapUiContentPadding"
+      >
+        <StandardListItem
+          title="{toItem/Name}"
+          description="{toItem/Type}"
+          info="{toItem/Price} {toItem/Currency}"
+          icon="https://{toItem/Picture}"
+          iconDensityAware="false"
+          iconInset="false"
+        />
+      </List>
+    </content>
+    <buttons>
+      <Button
+        text="{i18n>close}"
+        icon="sap-icon://decline"
+        press=".closeOrdersDialog"
+      />
+    </buttons>
+  </Dialog>
+</core:FragmentDefinition>

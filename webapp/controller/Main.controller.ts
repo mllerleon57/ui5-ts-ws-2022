@@ -7,12 +7,39 @@ import Event from "sap/ui/base/Event";
 import GridListItem from "sap/f/GridListItem";
 import MessageToast from "sap/m/MessageToast";
 import ODataModel from "sap/ui/model/odata/v2/ODataModel";
+import Fragment from "sap/ui/core/Fragment";
+import Dialog from "sap/m/Dialog";
 
 /**
  * @namespace de.inwerken.pizzaApp.controller
  */
 export default class Main extends BaseController {
   private formatter = formatter;
+  private _oOrdersDialog: Dialog;
+
+  public async showOrders() {
+    if (typeof this._oOrdersDialog === "undefined") {
+      this._oOrdersDialog = (await Fragment.load({
+        name: "de.inwerken.pizzaApp.view.fragment.Order",
+        controller: this,
+      })) as Dialog;
+      this.getView().addDependent(this._oOrdersDialog);
+    }
+
+    this._oOrdersDialog.open();
+  }
+
+  public deleteOrder(oEvent: Event) {
+    const sBindingPath = (oEvent.getParameter("listItem") as GridListItem)
+      .getBindingContext()
+      .getPath();
+
+    (this.getModel() as ODataModel).remove(sBindingPath);
+  }
+
+  public closeOrdersDialog() {
+    this._oOrdersDialog.close();
+  }
 
   public orderItem(oEvent: Event): void {
     const sPizzaId = (oEvent.getSource() as GridListItem)
@@ -29,7 +56,7 @@ export default class Main extends BaseController {
     });
   }
 
-  private _createOrder(sPizzaId: string) {
+  private _createOrder(sPizzaId: string): void {
     const oData = { Menuid: sPizzaId };
     const oResourceBundle = this.getResourceBundle() as ResourceBundle;
 

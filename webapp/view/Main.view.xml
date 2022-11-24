@@ -7,7 +7,14 @@
   xmlns:grid="sap.ui.layout.cssgrid"
   xmlns:mvc="sap.ui.core.mvc"
 >
-  <Page id="page" title="{i18n>title}">
+  <Page id="page">
+    <headerContent>
+      <OverflowToolbar width="100%">
+        <Title text="{i18n>title}" />
+        <ToolbarSpacer />
+        <Button icon="sap-icon://order-status" press=".showOrders" />
+      </OverflowToolbar>
+    </headerContent>
     <content>
       <f:GridList
         id="menuList"
@@ -30,12 +37,12 @@
               <Text text="{Price} {Currency}" width="70px" />
             </HBox>
             <HBox justifyContent="Center" renderType="Bare">
-              <Image
+              <!-- <Image
                 src="http://{Picture}"
                 width="95%"
                 height="170px"
                 lazyLoading="true"
-              />
+              /> -->
             </HBox>
           </f:GridListItem>
         </f:items>
